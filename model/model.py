@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import pickle
 
 # Load the Excel file
 data = pd.read_excel('E:\FYP - MVP\Model\data.xlsx')
@@ -75,4 +76,15 @@ print(f"Test Accuracy: {accuracy:.4f}")
 print("model evaluation successful")
 
 
-model.save_weights('model_weights.h5')
+model.save_weights('model_weights.weights.h5')
+
+
+# Save English tokenizer
+with open('english_tokenizer.pkl', 'wb') as file:
+    pickle.dump(english_tokenizer, file)
+
+# Save PSL tokenizer
+with open('psl_tokenizer.pkl', 'wb') as file:
+    pickle.dump(psl_tokenizer, file)
+
+print("Tokenizers saved successfully!")

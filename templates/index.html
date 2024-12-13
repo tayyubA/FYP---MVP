@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation MVP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>English to PSL</h1>
+        <form id="translation-form">
+            <label for="sentence">Enter English Sentence:</label>
+            <textarea id="sentence" rows="4" placeholder="Enter sentence to translate"></textarea>
+            <button type="submit">Translate</button>
+        </form>
+
+        <div id="result">
+            <h2>Translated PSL:</h2>
+            <p id="translation-output"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
