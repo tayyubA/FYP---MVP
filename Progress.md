@@ -6,3 +6,7 @@
 ###December 14, 2024###
 
 "To improve model performance we have trained our model using Transformer with pytorch framework"
+
+###December 18, 2024###
+
+"Configured Mongodb as the database for storing the words and their corresponding hamnosys, modified the interface to show the fetched hamnosys from the database, modified the backend to be able to take input word, match in the database and if match found return the respective hamnosys representation"
