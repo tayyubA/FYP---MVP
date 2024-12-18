@@ -5,22 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translation MVP</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .container {
+            display: flex; /* Enable flexbox layout for the container */
+        }
+
+        .left-side, .right-side {
+            width: 50%; /* Each side takes up 50% of the container width */
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>English to PSL</h1>
-        <form id="translation-form">
-            <label for="sentence">Enter English Sentence:</label>
-            <textarea id="sentence" rows="4" placeholder="Enter sentence to translate"></textarea>
-            <button type="submit">Translate</button>
-        </form>
 
-        <div id="result">
-            <h2>Translated PSL:</h2>
-            <p id="translation-output"></p>
+        <div class="left-side"> 
+            <h1>English to PSL & HamNoSys Fetcher</h1>
+
+            <form id="action-form">
+                <label for="sentence">Enter English Word/Sentence:</label>
+                <textarea id="sentence" rows="4" placeholder="Enter text"></textarea>
+
+                <div class="buttons">
+                    <button type="button" id="translate-btn">Translate to PSL</button>
+                    <button type="button" id="fetch-hamnosys-btn">Fetch HamNoSys</button>
+                </div>
+            </form>
+
+            <div id="result">
+                <h2>Result:</h2>
+                <p id="result-output"></p> 
+            </div>
+        </div> 
+
+        <div class="right-side">
+            <h1>SigML Player</h1> 
+            <div id="sigml-player"></div> 
         </div>
+
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jasigning@latest/dist/jasigning.js"></script> 
 </body>
 </html>

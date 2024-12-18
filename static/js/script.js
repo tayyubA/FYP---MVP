@@ -1,40 +1,48 @@
-document.getElementById('translation-form').addEventListener('submit', function (e) {
-    e.preventDefault();
+document.getElementById('translate-btn').addEventListener('click', function () {
+    processRequest('/translate', { sentence: document.getElementById('sentence').value });
+});
 
-    const sentence = document.getElementById('sentence').value;
+document.getElementById('fetch-hamnosys-btn').addEventListener('click', function () {
+    processRequest('/hamnosys', { word: document.getElementById('sentence').value });
+});
 
-    // Disable the button while processing
-    const button = document.querySelector('button');
-    button.disabled = true;
-    button.innerHTML = 'Translating...';
+function processRequest(url, body) {
+    // Disable the buttons while processing
+    const translateButton = document.getElementById('translate-btn');
+    const hamnosysButton = document.getElementById('fetch-hamnosys-btn');
+    translateButton.disabled = true;
+    hamnosysButton.disabled = true;
+    translateButton.innerHTML = 'Translating...';
+    hamnosysButton.innerHTML = 'Fetching...';
 
-    // Clear previous translation result
-    document.getElementById('translation-output').textContent = '';
+    // Clear previous result
+    document.getElementById('result-output').textContent = '';
 
-    // Send the input sentence to the backend for translation
-    fetch('/translate', {  // Match with Flask route
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ sentence: sentence })
+        body: JSON.stringify(body)
     })
     .then(response => response.json())
     .then(data => {
         if (data.translation) {
-            // Display the translated sentence
-            document.getElementById('translation-output').textContent = data.translation;
+            document.getElementById('result-output').textContent = 'PSL Translation: ' + data.translation;
+        } else if (data.hamnosys) {
+            document.getElementById('result-output').textContent = 'Hamnosys Representation: ' + data.hamnosys;
         } else {
-            // Display the error message
-            document.getElementById('translation-output').textContent = "Error: " + data.error;
+            document.getElementById('result-output').textContent = "Error: " + data.error;
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        document.getElementById('translation-output').textContent = "Error occurred while translating.";
+        document.getElementById('result-output').textContent = "Error occurred while processing.";
     })
     .finally(() => {
-        button.disabled = false;
-        button.innerHTML = 'Translate';
+        translateButton.disabled = false;
+        hamnosysButton.disabled = false;
+        translateButton.innerHTML = 'Translate to PSL';
+        hamnosysButton.innerHTML = 'Fetch HamNoSys';
     });
-});
+}

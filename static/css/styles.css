@@ -1,59 +1,141 @@
+/* Reset body margin and padding for a cleaner layout */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1f8ff; /* Light blue background for a fresh feel */
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: #333; /* Darker text for readability */
 }
 
+/* Container setup */
 .container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
+    background-color: #ffffff;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 80%; /* Adjust container width */
+    display: flex;
+    gap: 40px; /* Add space between the columns */
+    justify-content: center;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
 
+/* Left-side and right-side columns styling */
+.left-side, .right-side {
+    flex: 1;
+    background-color: #f7f7f7; /* Subtle background for each column */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add depth with box shadow */
+}
+
+/* Header styles */
 h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
     text-align: center;
+    color: #444; /* Slightly darker text */
+    margin-bottom: 20px;
 }
 
+/* Textarea styling */
 textarea {
     width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 15px;
+    padding: 15px;
     font-size: 16px;
+    border-radius: 8px;
     border: 1px solid #ddd;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    resize: vertical;
+    transition: all 0.3s ease;
 }
 
+/* Add focus effect on textarea */
+textarea:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.2);
+    outline: none;
+}
+
+/* Button styling */
 button {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
+    width: 48%;
+    padding: 12px;
+    border-radius: 8px;
     background-color: #28a745;
     color: white;
     border: none;
     font-size: 16px;
     cursor: pointer;
+    margin: 10px 1%;
+    transition: all 0.3s ease;
 }
 
+/* Hover effect for buttons */
 button:hover {
     background-color: #218838;
+    transform: scale(1.05); /* Slight scale-up effect */
 }
 
+/* Disabled button styling */
+button:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+}
+
+/* Button container for spacing */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* Result section */
 #result {
     margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-#translation-output {
+#result-output {
     font-size: 18px;
     color: #333;
-    padding: 10px;
     background-color: #e9ecef;
-    border-radius: 4px;
+    border-radius: 8px;
+    padding: 15px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+/* Button focus effect */
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .left-side, .right-side {
+        width: 100%;
+        padding: 20px;
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
 }

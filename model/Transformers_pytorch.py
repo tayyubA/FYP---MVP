@@ -5,26 +5,21 @@ from transformers import AdamW
 import pandas as pd
 from tqdm import tqdm
 
-# Load the Excel file
-file_path = 'E:/FYP - MVP/Model/data.xlsx'  # Replace with your file path
-sheet_name = 0  # Replace with your sheet name or index if needed
+file_path = 'E:/FYP - MVP/Model/data.xlsx'  
+sheet_name = 0  
 
-# Read the Excel file
 df = pd.read_excel(file_path, sheet_name=sheet_name)
 
-# Assuming the first column contains English sentences and the second contains PSL sentences
-column1 = 'English'  # Replace with your actual column name
-column2 = 'PSL'      # Replace with your actual column name
+column1 = 'English'  
+column2 = 'PSL'      
 
-# Convert to a list of dictionaries in the required format
 data_list = [{'en': en, 'psl': psl} for en, psl in zip(df[column1], df[column2])]
 
-# Initialize the model and tokenizer
-model_name = "t5-small"  # You can use t5-base or t5-large for larger models
+model_name = "t5-small"  
 model = T5ForConditionalGeneration.from_pretrained(model_name)
 tokenizer = T5Tokenizer.from_pretrained(model_name)
 
-# Set parameters
+
 max_input_length = 128
 max_target_length = 128
 source_lang = "en"
@@ -61,7 +56,6 @@ class TranslationDataset(Dataset):
         return preprocess_function([example])
 
 
-# Create the Dataset and DataLoader
 train_dataset = TranslationDataset(data_list, tokenizer)
 train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=True)
 
